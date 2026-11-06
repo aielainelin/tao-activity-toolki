@@ -2070,7 +2070,7 @@
 <!-- Slide Overview Modal -->
 <div class="overview-modal" id="overviewModal">
   <div style="display:flex; justify-content:space-between; align-items:center;">
-    <h2 style="font-size:1.8rem; color:var(--accent-yellow);">📑 33 頁投影片總覽（點擊直接跳頁，按 G 或 Esc 關閉）</h2>
+    <h2 style="font-size:1.8rem; color:var(--accent-yellow);">📑 課程投影片總覽（全 16 幕，按 G 或 Esc 關閉）</h2>
     <button class="timer-btn" onclick="toggleOverview()">關閉總覽 ✕</button>
   </div>
   <div class="overview-grid" id="overviewGrid"></div>
@@ -2079,7 +2079,7 @@
 <!-- Bottom Navigation Bar -->
 <div class="bottom-bar">
   <div class="progress-wrap">
-    <span id="slideCounter" style="font-weight:700; min-width:90px;">01 / 33</span>
+    <span id="slideCounter" style="font-weight:700; min-width:90px;">01 / 16</span>
     <span id="fragHint" class="frag-hint"></span>
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill"></div>
@@ -2234,10 +2234,35 @@
       el.classList.toggle('current', idx === current);
     });
 
-    if (current === 11) {
-      setTimeout(initWaveCanvas, 60);
+    // Auto-detect and activate animated soundwave canvas on active slide
+    if (slides[current].querySelector('#d3WaveContainer')) {
+      setTimeout(() => {
+        initWaveCanvas();
+        resizeWaveCanvas();
+      }, 50);
     }
+    // Update URL hash cleanly (e.g. #7)
+    try {
+      if (window.location.hash !== '#' + (current + 1)) {
+        history.replaceState(null, '', '#' + (current + 1));
+      }
+    } catch (e) {}
   }
+
+  function getSlideFromHash() {
+    const h = window.location.hash.replace('#', '').trim();
+    if (!h) return 0;
+    const num = parseInt(h, 10);
+    if (!isNaN(num) && num >= 1 && num <= slides.length) {
+      return num - 1;
+    }
+    return 0;
+  }
+
+  window.addEventListener('hashchange', () => {
+    const target = getSlideFromHash();
+    if (target !== current) showSlide(target);
+  });
 
   function pendingFragments() {
     return Array.from(slides[current].querySelectorAll('.fragment:not(.shown)'));
@@ -2424,11 +2449,14 @@
   }
 
   function resizeWaveCanvas() {
-    if (!waveCanvas) return;
-    const rect = waveCanvas.getBoundingClientRect();
+    const container = document.getElementById('d3WaveContainer');
+    if (!waveCanvas || !container) return;
+    const rect = container.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
-    waveCanvas.width = (rect.width || 900) * dpr;
-    waveCanvas.height = (rect.height || 72) * dpr;
+    const w = (rect.width > 20 ? rect.width : (container.clientWidth || 900));
+    const h = (rect.height > 20 ? rect.height : 72);
+    waveCanvas.width = w * dpr;
+    waveCanvas.height = h * dpr;
   }
 
   function drawWaveFrame() {
@@ -2533,10 +2561,16 @@
     }
   }
 
-  window.addEventListener('DOMContentLoaded', () => setTimeout(initWaveCanvas, 50));
-  window.addEventListener('load', () => setTimeout(initWaveCanvas, 100));
+  window.addEventListener('DOMContentLoaded', () => {
+    const startIdx = getSlideFromHash();
+    showSlide(startIdx);
+  });
+  window.addEventListener('load', () => {
+    const startIdx = getSlideFromHash();
+    showSlide(startIdx);
+  });
 
-  showSlide(0);
+  showSlide(getSlideFromHash());
 </script>
 </body>
 </html>
