@@ -728,6 +728,16 @@
   }
 
 </style>
+
+<script src="js/d3.v7.min.js"></script>
+<script>
+  if (!window.d3) {
+    var s = document.createElement("script");
+    s.src = "https://d3js.org/d3.v7.min.js";
+    document.head.appendChild(s);
+  }
+</script>
+
 </head>
 <body>
 
@@ -1160,17 +1170,40 @@
   </section>
 
   <!-- Slide 12 -->
-  <section class="slide" data-notes="10:05-10:09（講 4 分鐘，含下一頁贅字）你在台上出 120% 的力，台下才收得到 100%！">
+  <section class="slide" data-notes="10:05-10:09（講 4 分鐘，含下一頁贅字）你在台上出 120% 的力，台下才收得到 100%！點擊下方三檔卡片，上方 D3 聲波會即時狂飆變形！">
     <div class="slide-top">
       <span class="module-pill">🎤 模組二之二｜10:05 - 10:15 舞台魅力三大神器【聲】</span>
     </div>
     <h2 class="slide-title">【聲】主持人聲音 <span class="hl">三段變速箱</span></h2>
     <div class="slide-body">
-      <div class="card cyan" style="text-align:center;">
-        <p>⚡ <strong>能量遞減法則</strong>：你在台上出 <strong>120%</strong> 的力，台下最後一排才收得到 <strong>100%</strong> 的熱情！</p>
+
+      <!-- D3 實時動態聲波晶片 (Apple Audio Waveform Engine) -->
+      <div class="card" id="audioWaveCard" style="padding: 10px 20px; margin-bottom: 6px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); position: relative; overflow: hidden; border-radius: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">🎙️</span>
+            <span style="font-size: 1.25rem; font-weight: 800; color: #fff;">D3 實時聲波變速儀</span>
+            <span id="gearStatusBadge" style="font-size: 1.15rem; font-weight: 800; padding: 2px 14px; border-radius: 999px; background: rgba(255,159,10,0.18); color: var(--accent-yellow); border: 1px solid rgba(255,159,10,0.35); transition: all 0.3s ease;">
+              🚀 1檔：狂歡高檔（120% 爆發能量・高頻震盪）
+            </span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="timer-btn" onclick="setVoiceGear(1)" id="btnGear1" style="background: linear-gradient(135deg, #ff9f0a, #ff453a); color:#fff; font-size:1.1rem; padding: 4px 14px; box-shadow: 0 0 14px rgba(255,159,10,0.4);">一檔 120%</button>
+            <button class="timer-btn" onclick="setVoiceGear(2)" id="btnGear2" style="background: rgba(255,255,255,0.06); color:#30d158; border:1px solid rgba(48,209,88,0.35); font-size:1.1rem; padding: 4px 14px;">二檔 60%</button>
+            <button class="timer-btn" onclick="setVoiceGear(3)" id="btnGear3" style="background: rgba(255,255,255,0.06); color:var(--accent-cyan); border:1px solid rgba(41,151,255,0.35); font-size:1.1rem; padding: 4px 14px;">三檔 30%</button>
+          </div>
+        </div>
+
+        <!-- D3 Waveform SVG Canvas Container -->
+        <div id="d3WaveContainer" style="width: 100%; height: 72px; position: relative;"></div>
       </div>
+
+      <div class="card cyan" style="text-align:center; padding: 8px 16px; margin-bottom: 6px;">
+        <p style="margin:0;">⚡ <strong>能量遞減法則</strong>：你在台上出 <strong>120%</strong> 的力，台下最後一排才收得到 <strong>100%</strong> 的熱情！（點擊任一卡片即刻變速）</p>
+      </div>
+
       <div class="grid-3">
-        <div class="card highlight">
+        <div class="card highlight" id="gearCard1" onclick="setVoiceGear(1)" style="cursor: pointer; transition: all 0.25s ease; border: 2px solid var(--accent-yellow); box-shadow: 0 0 20px rgba(255,159,10,0.25);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span style="font-size:1.28rem; font-weight:800; color:var(--accent-orange); letter-spacing:1px;">HIGH GEAR</span>
             <span style="font-size:1.22rem; font-weight:900; color:var(--accent-yellow); background:rgba(255,214,10,0.15); padding:2px 8px; border-radius:12px;">120% 爆發</span>
@@ -1181,7 +1214,8 @@
           <h3>🚀 一檔：狂歡高檔</h3>
           <p><strong>時機</strong>：開場破冰、分隊叫陣、宣布冠軍<br><strong>秘訣</strong>：節奏快、語調上揚、丹田發力！<br><em>「尖叫聲借給我——！」</em></p>
         </div>
-        <div class="card">
+
+        <div class="card" id="gearCard2" onclick="setVoiceGear(2)" style="cursor: pointer; transition: all 0.25s ease;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span style="font-size:1.28rem; font-weight:800; color:#30d158; letter-spacing:1px;">MID GEAR</span>
             <span style="font-size:1.22rem; font-weight:900; color:#30d158; background:rgba(48,209,88,0.15); padding:2px 8px; border-radius:12px;">60% 穩健</span>
@@ -1192,7 +1226,8 @@
           <h3>⚖️ 二檔：清楚中檔</h3>
           <p><strong>時機</strong>：說明複雜遊戲規則、流程指引<br><strong>秘訣</strong>：速度放慢、咬字清晰、語氣篤定，讓後排長輩也聽得懂！</p>
         </div>
-        <div class="card cyan">
+
+        <div class="card cyan" id="gearCard3" onclick="setVoiceGear(3)" style="cursor: pointer; transition: all 0.25s ease;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span style="font-size:1.28rem; font-weight:800; color:var(--accent-cyan); letter-spacing:1px;">LOW GEAR</span>
             <span style="font-size:1.22rem; font-weight:900; color:var(--accent-cyan); background:rgba(41,151,255,0.15); padding:2px 8px; border-radius:12px;">30% 走心</span>
@@ -2207,6 +2242,10 @@
     document.querySelectorAll('.overview-item').forEach((el, idx) => {
       el.classList.toggle('current', idx === current);
     });
+
+    if (current === 11) {
+      setTimeout(initD3Waveform, 60);
+    }
   }
 
   function pendingFragments() {
