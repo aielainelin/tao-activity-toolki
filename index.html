@@ -2376,6 +2376,166 @@
     }
   });
 
+  // ==================== Native Apple Waveform Engine ====================
+  let currentVoiceGear = 1;
+  let waveParams = {
+    amp: 24,
+    freq: 0.007,
+    speed: 0.075,
+    color1: '#ff9f0a',
+    color2: '#ff453a',
+    glow: 'rgba(255, 159, 10, 0.7)'
+  };
+  let targetWaveParams = {
+    amp: 24,
+    freq: 0.007,
+    speed: 0.075,
+    color1: '#ff9f0a',
+    color2: '#ff453a',
+    glow: 'rgba(255, 159, 10, 0.7)'
+  };
+
+  let wavePhase = 0;
+  let waveCanvas, waveCtx, waveAnimId;
+
+  function initWaveCanvas() {
+    const container = document.getElementById('d3WaveContainer');
+    if (!container) return;
+    if (waveCanvas && container.contains(waveCanvas)) {
+      resizeWaveCanvas();
+      return;
+    }
+
+    container.innerHTML = '';
+    waveCanvas = document.createElement('canvas');
+    waveCanvas.style.width = '100%';
+    waveCanvas.style.height = '100%';
+    waveCanvas.style.display = 'block';
+    container.appendChild(waveCanvas);
+
+    waveCtx = waveCanvas.getContext('2d');
+    resizeWaveCanvas();
+    window.removeEventListener('resize', resizeWaveCanvas);
+    window.addEventListener('resize', resizeWaveCanvas);
+
+    if (!waveAnimId) {
+      waveAnimId = requestAnimationFrame(drawWaveFrame);
+    }
+  }
+
+  function resizeWaveCanvas() {
+    if (!waveCanvas) return;
+    const rect = waveCanvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    waveCanvas.width = (rect.width || 900) * dpr;
+    waveCanvas.height = (rect.height || 72) * dpr;
+  }
+
+  function drawWaveFrame() {
+    if (!waveCanvas || !waveCtx) {
+      waveAnimId = requestAnimationFrame(drawWaveFrame);
+      return;
+    }
+    const dpr = window.devicePixelRatio || 1;
+    const w = waveCanvas.width;
+    const h = waveCanvas.height;
+    const centerY = h / 2;
+
+    waveParams.amp += (targetWaveParams.amp - waveParams.amp) * 0.08;
+    waveParams.freq += (targetWaveParams.freq - waveParams.freq) * 0.08;
+    waveParams.speed += (targetWaveParams.speed - waveParams.speed) * 0.08;
+    wavePhase += waveParams.speed;
+
+    waveCtx.clearRect(0, 0, w, h);
+
+    const grad = waveCtx.createLinearGradient(0, 0, w, 0);
+    grad.addColorStop(0, targetWaveParams.color1);
+    grad.addColorStop(1, targetWaveParams.color2);
+
+    function drawSine(ampMultiplier, freqMultiplier, phaseOffset, lineWidth, alpha, isMain) {
+      waveCtx.save();
+      waveCtx.beginPath();
+      waveCtx.strokeStyle = grad;
+      waveCtx.globalAlpha = alpha;
+      waveCtx.lineWidth = lineWidth * dpr;
+      if (isMain) {
+        waveCtx.shadowColor = targetWaveParams.glow;
+        waveCtx.shadowBlur = 14 * dpr;
+      }
+
+      const points = 100;
+      const step = w / (points - 1);
+      for (let i = 0; i < points; i++) {
+        const x = i * step;
+        const norm = i / (points - 1);
+        const env = Math.sin(norm * Math.PI);
+        const y = centerY + Math.sin(x * waveParams.freq * freqMultiplier + wavePhase + phaseOffset) * (waveParams.amp * dpr * ampMultiplier) * env
+                          + Math.sin(x * waveParams.freq * 2.1 - wavePhase * 1.3) * (waveParams.amp * dpr * 0.3 * ampMultiplier) * env;
+        if (i === 0) waveCtx.moveTo(x, y);
+        else waveCtx.lineTo(x, y);
+      }
+      waveCtx.stroke();
+      waveCtx.restore();
+    }
+
+    drawSine(0.5, 0.7, 1.5, 1.8, 0.25, false);
+    drawSine(0.8, 1.2, 0.8, 2.4, 0.55, false);
+    drawSine(1.0, 1.0, 0.0, 4.0, 1.0, true);
+
+    waveAnimId = requestAnimationFrame(drawWaveFrame);
+  }
+
+  function setVoiceGear(gear) {
+    currentVoiceGear = gear;
+    initWaveCanvas();
+
+    const badge = document.getElementById('gearStatusBadge');
+    const b1 = document.getElementById('btnGear1');
+    const b2 = document.getElementById('btnGear2');
+    const b3 = document.getElementById('btnGear3');
+    const c1 = document.getElementById('gearCard1');
+    const c2 = document.getElementById('gearCard2');
+    const c3 = document.getElementById('gearCard3');
+
+    [b1, b2, b3].forEach(b => { if (b) { b.style.background = 'rgba(255,255,255,0.06)'; b.style.boxShadow = 'none'; } });
+    [c1, c2, c3].forEach(c => { if (c) { c.style.border = '1px solid var(--border-subtle)'; c.style.boxShadow = 'none'; c.style.transform = 'scale(1)'; } });
+
+    if (gear === 1) {
+      targetWaveParams = { amp: 26, freq: 0.008, speed: 0.08, color1: '#ff9f0a', color2: '#ff453a', glow: 'rgba(255,159,10,0.7)' };
+      if (badge) {
+        badge.innerHTML = '🚀 1檔：狂歡高檔（120% 爆發能量・高頻震盪）';
+        badge.style.color = 'var(--accent-yellow)';
+        badge.style.background = 'rgba(255,159,10,0.18)';
+        badge.style.borderColor = 'rgba(255,159,10,0.35)';
+      }
+      if (b1) { b1.style.background = 'linear-gradient(135deg, #ff9f0a, #ff453a)'; b1.style.color = '#fff'; b1.style.boxShadow = '0 0 14px rgba(255,159,10,0.4)'; }
+      if (c1) { c1.style.border = '2px solid var(--accent-yellow)'; c1.style.boxShadow = '0 0 24px rgba(255,159,10,0.25)'; c1.style.transform = 'translateY(-3px)'; }
+    } else if (gear === 2) {
+      targetWaveParams = { amp: 15, freq: 0.0045, speed: 0.038, color1: '#30d158', color2: '#64d2ff', glow: 'rgba(48,209,88,0.7)' };
+      if (badge) {
+        badge.innerHTML = '⚖️ 2檔：清楚中檔（60% 穩健節奏・字字分明）';
+        badge.style.color = '#30d158';
+        badge.style.background = 'rgba(48,209,88,0.18)';
+        badge.style.borderColor = 'rgba(48,209,88,0.35)';
+      }
+      if (b2) { b2.style.background = 'linear-gradient(135deg, #30d158, #0071e3)'; b2.style.color = '#fff'; b2.style.boxShadow = '0 0 14px rgba(48,209,88,0.4)'; }
+      if (c2) { c2.style.border = '2px solid #30d158'; c2.style.boxShadow = '0 0 24px rgba(48,209,88,0.25)'; c2.style.transform = 'translateY(-3px)'; }
+    } else if (gear === 3) {
+      targetWaveParams = { amp: 7, freq: 0.0022, speed: 0.016, color1: '#0a84ff', color2: '#bf5af2', glow: 'rgba(41,151,255,0.7)' };
+      if (badge) {
+        badge.innerHTML = '🕊️ 3檔：溫馨低檔（30% 走心微瀾・溫暖入心）';
+        badge.style.color = 'var(--accent-cyan)';
+        badge.style.background = 'rgba(41,151,255,0.18)';
+        badge.style.borderColor = 'rgba(41,151,255,0.35)';
+      }
+      if (b3) { b3.style.background = 'linear-gradient(135deg, #0a84ff, #bf5af2)'; b3.style.color = '#fff'; b3.style.boxShadow = '0 0 14px rgba(41,151,255,0.4)'; }
+      if (c3) { c3.style.border = '2px solid var(--accent-cyan)'; c3.style.boxShadow = '0 0 24px rgba(41,151,255,0.25)'; c3.style.transform = 'translateY(-3px)'; }
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => setTimeout(initWaveCanvas, 50));
+  window.addEventListener('load', () => setTimeout(initWaveCanvas, 100));
+
   showSlide(0);
 </script>
 </body>
