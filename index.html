@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>撐起全場・帶動人心 — 晚會 & 主持技巧｜2026年活動組團康實戰課程</title>
+<style>
+  :root {
+    --bg-dark: #0a0f1d;
+    --bg-card: rgba(255, 255, 255, 0.07);
+    --bg-card-hover: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --accent-cyan: #38bdf8;
+    --accent-orange: #fb923c;
+    --accent-yellow: #facc15;
+    --accent-green: #4ade80;
+    --accent-pink: #f472b6;
+    --accent-gold: #f59e0b;
+    --border-subtle: rgba(255, 255, 255, 0.14);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    user-select: none;
+  }
+
+  /* Deck Layout */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 56px 72px 84px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(40px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    background: radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.16), transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(251, 146, 60, 0.12), transparent 45%),
+                linear-gradient(135deg, #090d1a 0%, #111827 60%, #1e1b4b 100%);
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  /* Practice Slide Theme */
+  .slide.theme-practice {
+    background: radial-gradient(circle at 85% 15%, rgba(250, 204, 21, 0.25), transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(249, 115, 22, 0.18), transparent 45%),
+                linear-gradient(135deg, #1c1917 0%, #272010 55%, #1f1605 100%);
+    border-top: 8px solid var(--accent-yellow);
+  }
+
+  /* Temple Slide Theme */
+  .slide.theme-temple {
+    background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.22), transparent 50%),
+                linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #271f10 100%);
+    border-top: 8px solid var(--accent-gold);
+  }
+
+  /* Top Header inside Slide */
+  .slide-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .module-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+  }
+
+  .theme-practice .module-pill {
+    background: var(--accent-yellow);
+    color: #0f172a;
+    border-color: var(--accent-yellow);
+    box-shadow: 0 0 24px rgba(250, 204, 21, 0.4);
+  }
+
+  .theme-temple .module-pill {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fde68a;
+    border-color: rgba(245, 158, 11, 0.5);
+  }
+
+  .slide-title {
+    font-size: 2.65rem;
+    font-weight: 800;
+    line-height: 1.22;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+
+  .slide-title .hl {
+    color: var(--accent-yellow);
+  }
+
+  .slide-title .hl-cyan {
+    color: var(--accent-cyan);
+  }
+
+  .slide-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    min-height: 0;
+  }
+
+  /* Grids & Cards */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 24px 28px;
+    backdrop-filter: blur(8px);
+  }
+
+  .card.highlight {
+    border-color: rgba(250, 204, 21, 0.6);
+    background: rgba(250, 204, 21, 0.09);
+  }
+
+  .card.cyan {
+    border-color: rgba(56, 189, 248, 0.5);
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  .card.bonus {
+    border-left: 6px solid var(--accent-orange);
+    background: rgba(251, 146, 60, 0.12);
+    padding: 16px 24px;
+  }
+
+  .card.warn {
+    border-left: 6px solid #f43f5e;
+    background: rgba(244, 63, 94, 0.12);
+    padding: 16px 24px;
+  }
+
+  .card h3 {
+    font-size: 1.55rem;
+    margin-bottom: 12px;
+    color: var(--accent-yellow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card p, .card li {
+    font-size: 1.32rem;
+    line-height: 1.55;
+    color: var(--text-main);
+  }
+
+  .card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card ul li::before {
+    content: "▸ ";
+    color: var(--accent-cyan);
+    font-weight: bold;
+  }
+
+  .theme-practice .card ul li::before {
+    color: var(--accent-yellow);
+  }
+
+  /* Cover & Big Quote */
+  .hero-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 24px;
+  }
+
+  .hero-title {
+    font-size: 4.1rem;
+    font-weight: 900;
+    line-height: 1.18;
+    background: linear-gradient(90deg, #ffffff 0%, #fde047 50%, #fb923c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.85rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+  }
+
+  .big-quote {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.5;
+    padding: 38px 48px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(250, 204, 21, 0.45);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    max-width: 1100px;
+  }
+
+  .slogan-footer {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--accent-yellow);
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: rgba(250, 204, 21, 0.14);
+    border: 1px solid rgba(250, 204, 21, 0.4);
+  }
+
+  /* Tables */
+  table.slide-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.32rem;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  table.slide-table th {
+    background: rgba(56, 189, 248, 0.2);
+    color: var(--accent-yellow);
+    text-align: left;
+    padding: 15px 22px;
+    font-size: 1.35rem;
+  }
+
+  table.slide-table td {
+    padding: 15px 22px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  table.slide-table tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  /* Step Flow Boxes */
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .flow-step {
+    flex: 1;
+    background: var(--bg-card);
+    border: 2px solid rgba(250, 204, 21, 0.4);
+    border-radius: 20px;
+    padding: 22px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .flow-step .num {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    background: var(--accent-yellow);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .flow-step h4 {
+    font-size: 1.6rem;
+    color: var(--accent-yellow);
+  }
+
+  .flow-step p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--accent-yellow);
+    font-weight: 900;
+  }
+
+  /* Timer Widget */
+  .timer-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(15, 23, 42, 0.88);
+    border: 2px solid var(--accent-yellow);
+    padding: 8px 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .timer-display {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: var(--accent-yellow);
+    min-width: 105px;
+    text-align: center;
+  }
+
+  .timer-display.urgent {
+    color: #f43f5e;
+    animation: pulse 0.6s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  .timer-btn {
+    background: var(--accent-yellow);
+    color: #0f172a;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+  }
+
+  .timer-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .timer-btn.secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+  }
+
+  /* Reveal Items */
+  .reveal-item {
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .reveal-item.covered .answer {
+    filter: blur(10px);
+    opacity: 0.35;
+    user-select: none;
+  }
+
+  .reveal-item.covered:hover {
+    border-color: var(--accent-yellow);
+  }
+
+  /* Roulette Wheel */
+  .roulette-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .roulette-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    padding: 22px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .roulette-card.selected {
+    background: rgba(250, 204, 21, 0.25);
+    border-color: var(--accent-yellow);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 30px rgba(250, 204, 21, 0.5);
+  }
+
+  .roulette-card .icon {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+  }
+
+  .roulette-card h4 {
+    font-size: 1.45rem;
+    color: var(--accent-yellow);
+    margin-bottom: 8px;
+  }
+
+  .roulette-card p {
+    font-size: 1.12rem;
+    color: var(--text-muted);
+  }
+
+  /* Fragment sequential reveal (one item by one item) */
+  .fragment {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fragment.shown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  tr.fragment {
+    display: table-row;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  tr.fragment.shown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .frag-hint {
+    font-size: 0.9rem;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin-left: 12px;
+  }
+
+  /* Bottom Navigation Bar */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(9, 13, 26, 0.92);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .progress-wrap {
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-yellow));
+    width: 0%;
+    transition: width 0.25s ease;
+  }
+
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Speaker Notes Drawer */
+  .notes-drawer {
+    position: fixed;
+    bottom: 60px;
+    left: 28px;
+    right: 28px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 2px solid var(--accent-cyan);
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 26px;
+    z-index: 95;
+    transform: translateY(110%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .notes-drawer.open {
+    transform: translateY(0);
+  }
+
+  .notes-drawer h5 {
+    color: var(--accent-cyan);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .notes-drawer p {
+    font-size: 1.18rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+  }
+
+  /* Slide Overview Modal */
+  .overview-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 26, 0.96);
+    z-index: 200;
+    padding: 40px 56px;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .overview-modal.open {
+    display: block;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .overview-item {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .overview-item:hover, .overview-item.current {
+    border-color: var(--accent-yellow);
+    background: rgba(250, 204, 21, 0.12);
+  }
+
+  .overview-item.is-practice {
+    border-left: 5px solid var(--accent-yellow);
+  }
+
+  .overview-item .idx {
+    font-size: 0.9rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .overview-item .ttl {
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 01 -->
+  <section class="slide active" data-notes="09:40 開場前可先切到第 2 頁輪播精神標語。一到 09:40 用 120% 全場點燃型能量問候全場！">
+    <div class="hero-center">
+      <div class="module-pill">🔥 2026 年活動組團康實戰課程（第三講）</div>
+      <h1 class="hero-title">撐起全場・帶動人心<br>晚會 & 主持技巧</h1>
+      <div class="hero-sub" style="font-size: 1.15rem; color: var(--accent-yellow); font-weight: 700; margin-bottom: 8px;">
+        ⚡ 2026.11.08（日）09:40 - 12:00 ｜ 活動組全員實戰特訓
+      </div>
+
+      <!-- 全員特訓警告與準備心態 -->
+      <div class="card" style="border: 2px solid var(--accent-orange); background: linear-gradient(135deg, rgba(249,115,22,0.22), rgba(239,68,68,0.18)); padding: 14px 24px; margin: 10px auto 14px auto; max-width: 960px; text-align: center;">
+        <span style="font-size: 1.25rem; font-weight: 900; color: #ffedd5; letter-spacing: 0.5px;">
+          🚨 【全員特訓公告】今天沒有坐著聽講！全程瘋狂實戰演練！隨時輪流登台！
+        </span>
+      </div>
+
+      <div class="grid-3" style="max-width: 960px; width: 100%; margin-top: 6px;">
+        <div class="card highlight fragment" style="text-align:center;">
+          <h3>🎤 全員開麥演練</h3>
+          <p>全堂 11 次互動實作<br>09:42 就開口，隨時換你上台！</p>
+        </div>
+        <div class="card cyan fragment" style="text-align:center;">
+          <h3>🛡️ 安全試錯空間</h3>
+          <p>卡住大聲喊救場台詞<br>這裡出錯零淘汰，全場掌聲挺你！</p>
+        </div>
+        <div class="card fragment" style="text-align:center;">
+          <h3>🕊️ 帶走即戰力</h3>
+          <p>身聲神・接拋引・時事救場<br>狂歡與莊嚴一秒切換，晚會現學現用</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 02 -->
+  <section class="slide" data-notes="課前輪播頁。09:40 一到直接切到 Slide 03 講兩條約定，不用停在這頁講解，模組六結尾會再回扣。">
+    <div class="hero-center" style="max-width: 1050px; width: 100%;">
+      <div class="module-pill" style="margin-bottom: 14px;">✨ 2026 活動組靈魂精神（課前輪播）</div>
+      
+      <div style="display: flex; align-items: center; justify-content: center; gap: 40px; margin: 10px 0 20px 0; flex-wrap: wrap;">
+        <!-- 濟公活佛師尊插畫 -->
+        <div style="flex: 0 0 auto; text-align: center;">
+          <img src="images/濟公活佛師尊插畫.jpg" alt="濟公活佛師尊 開懷大笑插畫" 
+               style="width: 270px; height: 270px; object-fit: cover; border-radius: 50%; border: 4px solid rgba(250, 204, 21, 0.75); box-shadow: 0 0 36px rgba(250, 204, 21, 0.4), 0 12px 36px rgba(0,0,0,0.65); cursor: pointer; transition: transform 0.3s ease;"
+               onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"
+               onclick="window.open(this.src)" title="點擊檢視原圖">
+          <div style="margin-top: 10px; font-size: 1.05rem; color: var(--accent-yellow); font-weight: 800; letter-spacing: 1.5px;">
+            🙏 活佛師尊慈訓
+          </div>
+        </div>
+
+        <!-- 經典名言大字 -->
+        <div style="flex: 1; min-width: 340px; text-align: left;">
+          <div class="big-quote" style="text-align: left; font-size: 2.35rem; line-height: 1.45; margin: 0 0 16px 0; border-left: 4px solid var(--accent-yellow); padding-left: 20px;">
+            「世人笑我太瘋癲，我笑他人看不穿。<br>
+            學習吃苦如吃補，才能轉逆境為增上緣。」
+          </div>
+          <div class="card" style="background: rgba(250, 204, 21, 0.08); border: 1px solid rgba(250, 204, 21, 0.35); padding: 12px 20px;">
+            <p style="font-size: 1.15rem; color: #fef08a; font-weight: 700; margin: 0; line-height: 1.4;">
+              ✨ <strong>道場活動組精神</strong>：能瘋、能玩、能控場！平時嗨翻全場，關鍵時刻懂分寸！
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slogan-footer" style="margin-top: 4px;">🎤 舞台是練心的拜墊；帶給人歡喜，就是最棒的行無畏施！</div>
+    </div>
+  </section>
+
+  <!-- Slide 03 -->
+  <section class="slide" data-notes="09:40-09:42（2分鐘）高能開場後，用 20 秒一句話帶過這兩條約定，給新生滿滿安全感，接著馬上開始體驗！">
+    <div class="slide-top">
+      <span class="module-pill">🎲 模組一｜09:40 - 09:55 暖身破冰體驗</span>
+    </div>
+    <h2 class="slide-title">在開始體驗前，我們先約好 <span class="hl">兩件事</span>！</h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card highlight fragment">
+          <h3>1️⃣ 錯了不淘汰</h3>
+          <p>卡住或做錯不用下台！只要用主持人口吻大聲說一句<strong>「救場台詞」</strong>，全場鼓掌繼續體驗！</p>
+        </div>
+        <div class="card cyan fragment">
+          <h3>2️⃣ 只拿自己開玩笑</h3>
+          <p><strong>自嘲是最高級的幽默，不做人身攻擊！</strong>不拿前賢、同修或夥伴的外表、年紀、失誤開玩笑，讓每個人都有滿滿安全感。</p>
+        </div>
+      </div>
+      <div class="card bonus fragment">
+        <p>👥 <strong>固定小組＋固定搭檔</strong>：整個上午我們都跟同一小組、同一位搭檔練習體驗！舊生小隊長請多照顧身邊的新夥伴！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 04: 第 1 關 -->
+  <section class="slide theme-practice" data-timer="120" data-notes="09:42-09:45（3分鐘）一句話講完規則＋找兩位助教示範一輪。第 1 關先不打拍子體驗 2 分鐘，熟悉順序即可！名詞保持『佛堂闔家觀賞級』。">
+    <div class="slide-top">
+      <span class="module-pill">🟡 暖身體驗 1/3｜第 1 關：不打拍子・熟悉角色（2 分鐘）</span>
+      <div class="timer-box" data-default="120"></div>
+    </div>
+    <h2 class="slide-title">名詞・聲音・動作 <span class="hl">（三合一反應考驗）</span></h2>
+    <div class="slide-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+      <div style="display:flex; justify-content:center; align-items:center; margin: 4px 0 14px 0;">
+        <img src="images/名詞聲音動作遊戲示意圖.png" alt="名詞・聲音・動作 體驗流程示意圖" 
+             style="max-height: 480px; width: auto; border-radius: 18px; border: 3px solid rgba(250, 204, 21, 0.6); box-shadow: 0 16px 44px rgba(0,0,0,0.65); cursor: pointer;" 
+             onclick="window.open(this.src)" title="點擊放大檢視原圖">
+      </div>
+      <div class="card highlight" style="max-width: 900px; width: 100%; text-align: center; padding: 10px 20px;">
+        <p style="font-size: 1.18rem; font-weight: 700; color: #fef08a; margin: 0;">
+          🌱 <strong>第 1 關任務</strong>：不打拍子！依序接力：① 說名詞 ➔ ② 叫聲音 ➔ ③ 做動作 ➔ ④ 接新詞（名詞請保持佛堂闔家觀賞級！）
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 05: 第 2 關 -->
+  <section class="slide theme-practice" data-timer="180" data-notes="09:45-09:48（3分鐘）全組慢拍拍腿『啪・啪・啪・啪』，每兩拍接出下一個！卡住時大聲喊時事救場台詞！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 暖身體驗 2/3｜第 2 關：全圈慢拍拍腿（3 分鐘）</span>
+      <div class="timer-box" data-default="180"></div>
+    </div>
+    <h2 class="slide-title">第 2 關：全圈慢拍拍腿 ＋ <span class="hl">時事救場台詞</span></h2>
+    <div class="slide-body">
+      <div style="display:flex; gap:24px; align-items:center;">
+        <!-- 圖片 -->
+        <div style="flex:0 0 auto; text-align:center;">
+          <img src="images/名詞聲音動作遊戲示意圖.png" alt="名詞聲音動作示意圖" 
+               style="max-height: 290px; width: auto; border-radius: 14px; border: 2px solid rgba(56, 189, 248, 0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: pointer;"
+               onclick="window.open(this.src)" title="點擊放大檢視原圖">
+          <div style="margin-top:6px; font-size:0.92rem; color:var(--accent-cyan); font-weight:700;">
+            ⚡ 跟著拍子走：名詞 ➔ 聲音 ➔ 動作 ➔ 接詞
+          </div>
+        </div>
+        <!-- 第二關規則與台詞 -->
+        <div style="flex:1;">
+          <div class="card cyan" style="margin-bottom:10px; padding:12px 18px;">
+            <h3>⚡ 第 2 關任務：全圈整齊慢拍拍腿！</h3>
+            <p style="font-size:1.05rem; line-height:1.45;">跟著拍子<strong>「啪・啪・啪・啪」</strong>走！每兩拍接下一個角色，慢一拍或做錯角色就算卡住！</p>
+          </div>
+          <div class="card highlight fragment" style="padding:12px 18px;">
+            <h3>🎤 卡住了？大聲喊一句時事／科技救場台詞就過關繼續體驗！</h3>
+            <div class="grid-2" style="margin-top: 8px; gap:8px;">
+              <p style="margin:0;">📡 <strong>「哎呀！我的大腦剛剛斷網了！」</strong></p>
+              <p style="margin:0;">💻 <strong>「系統重新開機中…開機成功！」</strong></p>
+              <p style="margin:0;">🎬 <strong>「導播！剛剛那是彩排，現在正式開始！」</strong></p>
+              <p style="margin:0;">🥺 <strong>「我現在有點不嘻嘻，掌聲借我變回嘻嘻！」</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 06: 第 3 關 -->
+  <section class="slide theme-practice" data-timer="180" data-notes="09:48-09:51（3分鐘）極限加速！拍子變兩倍快！限定名詞必須跟『佛堂或營隊』有關。在全場笑得最嗨的時候喊停！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 暖身體驗 3/3｜第 3 關：極速快拍 ＋ 佛堂主題（3 分鐘）</span>
+      <div class="timer-box" data-default="180"></div>
+    </div>
+    <h2 class="slide-title">第 3 關：極速快拍 ＋ <span class="hl">限定主題「佛堂或營隊」</span></h2>
+    <div class="slide-body">
+      <div style="display:flex; gap:24px; align-items:center;">
+        <!-- 圖片 -->
+        <div style="flex:0 0 auto; text-align:center;">
+          <img src="images/名詞聲音動作遊戲示意圖.png" alt="名詞聲音動作示意圖" 
+               style="max-height: 290px; width: auto; border-radius: 14px; border: 2px solid rgba(249, 115, 22, 0.6); box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: pointer;"
+               onclick="window.open(this.src)" title="點擊放大檢視原圖">
+          <div style="margin-top:6px; font-size:0.92rem; color:var(--accent-orange); font-weight:700;">
+            🔥 極限加速：名詞 ➔ 聲音 ➔ 動作 ➔ 接詞
+          </div>
+        </div>
+        <!-- 第三關規則 -->
+        <div style="flex:1;">
+          <div class="card highlight" style="margin-bottom:10px; padding:12px 18px;">
+            <h3>🔥 任務 1：極速快拍！拍子變兩倍快！</h3>
+            <p style="font-size:1.05rem; line-height:1.45;">挑戰極限神經反射！拍腿速度加倍，不能有一秒猶豫，考驗全圈默契！</p>
+          </div>
+          <div class="card cyan fragment" style="margin-bottom:10px; padding:12px 18px;">
+            <h3>🕊️ 任務 2：限定主題！必須跟「佛堂」或「營隊」有關！</h3>
+            <p style="font-size:1.05rem; line-height:1.45;">所有說出的名詞，必須是佛堂人事物（如：<strong>素便當、拜墊、仙佛、佛椅、三寶、小隊旗、佛桌</strong>…）！</p>
+          </div>
+          <div class="card bonus fragment" style="padding:10px 18px; text-align:center;">
+            <p style="font-size:1.05rem; font-weight:700; color:var(--accent-yellow); margin:0;">
+              ✨ 抓在全場笑得最開心、最嗨的那一刻——講師拍手喊停！
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 07: 問題 1 -->
+  <section class="slide" data-timer="30" data-notes="問題 1 討論與揭曉：先請搭檔互聊 30 秒『剛剛卡住那一秒你在想什麼』，隨機聽 1-2 位自願者分享，再揭曉三大心魔。點出：有人卡住時大家反而笑最開心！">
+    <div class="slide-top">
+      <span class="module-pill">🎲 暖身回饋 1/3｜主持心態反思</span>
+      <div class="timer-box" data-default="30"></div>
+    </div>
+    <h2 class="slide-title">問題 1：剛剛卡住的那一秒，<span class="hl">你的腦袋在想什麼？</span></h2>
+    <div class="slide-body">
+      <div class="card bonus" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="font-size:1.15rem; color:var(--accent-yellow);">💬 【學員討論 30 秒】</strong>
+          <span style="font-size:1.05rem; margin-left:8px;">跟身邊搭檔聊聊：剛剛輪到你卡住的那一瞬間，你在怕什麼？（按右上方 30s 計時開始）</span>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top: 6px;">
+        <div class="card fragment">
+          <h3>❌ 心魔 1：我不是搞笑咖</h3>
+          <p>👉 <strong>真相</strong>：主持不是單口相聲，而是<strong>氣氛的助燃劑與穿針引線者</strong>。細心、會看臉色的人，比自嗨咖更懂台下需要什麼！</p>
+        </div>
+        <div class="card cyan fragment">
+          <h3>❌ 心魔 2：佛堂只能嚴肅？</h3>
+          <p>👉 <strong>真相</strong>：活動組就是要帶出年輕人的熱情！只要<strong>不嘲弄、多鼓勵</strong>，越活潑有笑聲，新道親越覺得佛堂溫暖！</p>
+        </div>
+        <div class="card highlight fragment">
+          <h3>❌ 心魔 3：忘詞卡住怎麼辦？</h3>
+          <p>👉 <strong>真相</strong>：剛剛的<strong>「救場台詞」</strong>就是答案！坦率幽默自嘲，全場給你的掌聲反而最大聲！</p>
+        </div>
+      </div>
+      <div class="slogan-footer fragment" style="align-self:center; margin-top: 4px;">✨ 你剛剛已經發出怪聲、做了誇張動作——其實你們早就敢了！</div>
+    </div>
+  </section>
+
+  <!-- Slide 08: 問題 2 -->
+  <section class="slide" data-timer="30" data-notes="問題 2 討論與揭曉：先請搭檔互聊 30 秒『說名詞、發聲音、做動作像主持人的什麼功夫』，隨後帶出身、聲、神與串場、救場對照表。">
+    <div class="slide-top">
+      <span class="module-pill">🎲 暖身回饋 2/3｜主持能力拆解</span>
+      <div class="timer-box" data-default="30"></div>
+    </div>
+    <h2 class="slide-title">問題 2：說名詞・聲音・動作，<span class="hl">像主持人的什麼功夫？</span></h2>
+    <div class="slide-body">
+      <div class="card bonus" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="font-size:1.15rem; color:var(--accent-yellow);">💬 【學員討論 30 秒】</strong>
+          <span style="font-size:1.05rem; margin-left:8px;">跟身邊搭檔聊聊：遊戲裡的三個角色，分別考驗舞台上的哪種能力？</span>
+        </div>
+      </div>
+      <table class="slide-table" style="margin-top: 6px;">
+        <thead>
+          <tr>
+            <th>剛剛的遊戲動作</th>
+            <th>對應的主持人能力</th>
+            <th>舞台上的表現</th>
+            <th>等一下哪一段練</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="fragment">
+            <td>🗣️ <strong>說名詞</strong></td>
+            <td><strong style="color:var(--accent-yellow)">內容</strong></td>
+            <td>臨場想得到要講什麼、不腦袋空白</td>
+            <td>模組三</td>
+          </tr>
+          <tr class="fragment">
+            <td>🔊 <strong>發聲音</strong></td>
+            <td><strong style="color:var(--accent-cyan)">【聲】聲音表情</strong></td>
+            <td>聲音放得開、有高低快慢檔位</td>
+            <td>模組二之二</td>
+          </tr>
+          <tr class="fragment">
+            <td>🕺 <strong>做動作</strong></td>
+            <td><strong style="color:var(--accent-yellow)">【身】肢體走位</strong></td>
+            <td>手勢敢做大、麥克風穩、走位照顧全場</td>
+            <td>模組二之一</td>
+          </tr>
+          <tr class="fragment">
+            <td>⚡ <strong>接下一輪不停頓</strong></td>
+            <td><strong style="color:var(--accent-cyan)">串場（接・拋・引）</strong></td>
+            <td>上一段結束馬上接下一段，場子不冷掉</td>
+            <td>模組三之二</td>
+          </tr>
+          <tr class="fragment">
+            <td>😄 <strong>卡住說救場一句</strong></td>
+            <td><strong style="color:var(--accent-yellow)">翻車救場</strong></td>
+            <td>出錯時從容自嘲、幽默化解尷尬</td>
+            <td>模組五</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Slide 09: 問題 3 -->
+  <section class="slide" data-timer="30" data-notes="問題 3 討論與揭曉：先請搭檔互聊 30 秒『剛剛台上是怎麼帶這個體驗的』，揭曉帶團康五步驟：特別強調『第 5 步收尾給反饋』——愛的鼓勵＋具體點出剛剛看到的亮點畫面，不能草草結束！">
+    <div class="slide-top">
+      <span class="module-pill">🎲 暖身回饋 3/3｜晚會帶動心法</span>
+      <div class="timer-box" data-default="30"></div>
+    </div>
+    <h2 class="slide-title">問題 3：回想一下，<span class="hl">剛剛台上是怎麼帶這個體驗的？</span></h2>
+    <div class="slide-body">
+      <div class="card bonus" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="font-size:1.15rem; color:var(--accent-yellow);">💬 【學員討論 30 秒】</strong>
+          <span style="font-size:1.05rem; margin-left:8px;">跟身邊搭檔聊聊：台上剛才有哪幾個帶動步驟？為什麼大家一下子就放開投入了？</span>
+        </div>
+      </div>
+      <div class="flow-row" style="margin-top: 6px;">
+        <div class="flow-step fragment">
+          <span class="num">1</span>
+          <h4>講規則</h4>
+          <p><strong>一句話講完</strong><br>不囉嗦、不唸長篇</p>
+        </div>
+        <div class="flow-arrow fragment">➔</div>
+        <div class="flow-step fragment">
+          <span class="num">2</span>
+          <h4>示範一輪</h4>
+          <p><strong>先示範體驗</strong><br>看比聽快 10 倍</p>
+        </div>
+        <div class="flow-arrow fragment">➔</div>
+        <div class="flow-step fragment">
+          <span class="num">3</span>
+          <h4>由慢到快</h4>
+          <p><strong>逐步加速</strong><br>無拍 ➔ 慢 ➔ 快</p>
+        </div>
+        <div class="flow-arrow fragment">➔</div>
+        <div class="flow-step fragment">
+          <span class="num">4</span>
+          <h4>停在最嗨</h4>
+          <p><strong>意猶未盡就收</strong><br>把能量留給下段</p>
+        </div>
+        <div class="flow-arrow fragment">➔</div>
+        <div class="flow-step fragment" style="border-color:var(--accent-yellow); background:rgba(250,204,21,0.12);">
+          <span class="num" style="background:var(--accent-yellow); color:#0f172a;">5</span>
+          <h4 style="color:var(--accent-yellow);">收尾給反饋</h4>
+          <p><strong>愛的鼓勵＋點評亮點</strong><br>看見付出、接住熱情</p>
+        </div>
+      </div>
+      <div class="card highlight fragment" style="text-align:center; margin-top: 6px;">
+        <p>🎁 <strong>把這招帶回家</strong>：「名詞・聲音・動作」零道具隨時能體驗，這五步驟就是<strong>一整場晚會的縮小版</strong>！下次冷場直接掏出來用！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10 -->
+  <section class="slide" data-notes="09:55-09:59（講 4 分鐘）現場示範握網罩、放胸口、鐘擺晃動的反例，再示範 45 度角焊在下巴的黃金握法。">
+    <div class="slide-top">
+      <span class="module-pill">🎤 模組二之一｜09:55 - 10:05 舞台魅力三大神器【身】</span>
+    </div>
+    <h2 class="slide-title">【身】麥克風工藝 ＆ <span class="hl">舞台黃金三角走位</span></h2>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card highlight fragment">
+          <h3>🎙️ 麥克風黃金握法</h3>
+          <ul>
+            <li>握在<strong>管身中段</strong>，45 度角指向下巴</li>
+            <li>距離嘴唇 <strong>2～3 指寬</strong>（約 3～5 公分）</li>
+            <li><strong>「頭動麥克風跟著動」</strong>，像焊在下巴上！</li>
+            <li>❌ 地雷：握網罩、握底端天線、放胸口</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>🖐️ 非持麥手是放大器</h3>
+          <ul>
+            <li><strong>掌心向上</strong> ＝ 溫暖邀請</li>
+            <li><strong>單手指向小隊</strong> ＝ 拋球點名</li>
+            <li><strong>雙手舉高</strong> ＝ 帶動全場歡呼</li>
+            <li>❌ 切忌：插口袋、抱胸、貼褲縫</li>
+          </ul>
+        </div>
+        <div class="card fragment">
+          <h3>📐 舞台黃金三角走位</h3>
+          <ul>
+            <li><strong>中間定點</strong>：開場、宣布大規則</li>
+            <li><strong>左前定點</strong>：照顧左半邊夥伴</li>
+            <li><strong>右前定點</strong>：照顧右半邊夥伴</li>
+            <li>定點說話<strong>腳踩穩</strong>，告別鐘擺晃動！</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11 -->
+  <section class="slide theme-practice" data-timer="300" data-notes="09:59-10:04（練 5 分鐘）固定搭檔拿水瓶當麥克風，1.5 分鐘後交換，最後 1 分鐘請 1 位握法最標準的學員示範。">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 2｜【身】水瓶麥克風＋三角走位（5 分鐘）</span>
+      <div class="timer-box" data-default="300"></div>
+    </div>
+    <h2 class="slide-title">拿起水瓶當麥克風！<span class="hl">走三角定點＋三大手勢</span></h2>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card">
+          <h3>📍 定點 1：舞台中間</h3>
+          <p>台詞：<strong>「歡迎大家來到今晚的晚會！」</strong><br>🖐️ 手勢：<strong>雙手舉高</strong>（帶動歡呼）</p>
+        </div>
+        <div class="card cyan">
+          <h3>📍 定點 2：走向左前</h3>
+          <p>台詞：<strong>「左邊的夥伴，準備好了嗎？」</strong><br>🖐️ 手勢：<strong>單手指向</strong>（拋球點名）</p>
+        </div>
+        <div class="card">
+          <h3>📍 定點 3：走向右前</h3>
+          <p>台詞：<strong>「右邊也不能輸喔！」</strong><br>🖐️ 手勢：<strong>掌心向上</strong>（熱情邀請）</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>✅ 搭檔檢查員看這 4 點（1.5 分鐘交換）</h3>
+          <p>□ 握在管身中段　□ 距嘴 2~3 指寬　□ 頭轉麥跟著轉　□ 定點腳踩穩不晃</p>
+        </div>
+        <div class="card bonus fragment">
+          <h3>🔥 進階加碼</h3>
+          <p>把三個定點串成一段 30 秒完整開場，每換一個定點就自然換一個手勢！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12 -->
+  <section class="slide" data-notes="10:05-10:09（講 4 分鐘，含下一頁贅字）你在台上出 120% 的力，台下才收得到 100%！">
+    <div class="slide-top">
+      <span class="module-pill">🎤 模組二之二｜10:05 - 10:15 舞台魅力三大神器【聲】</span>
+    </div>
+    <h2 class="slide-title">【聲】主持人聲音 <span class="hl">三段變速箱</span></h2>
+    <div class="slide-body">
+      <div class="card cyan" style="text-align:center;">
+        <p>⚡ <strong>能量遞減法則</strong>：你在台上出 <strong>120%</strong> 的力，台下最後一排才收得到 <strong>100%</strong> 的熱情！</p>
+      </div>
+      <div class="grid-3">
+        <div class="card highlight">
+          <h3>🚀 一檔：狂歡高檔</h3>
+          <p><strong>時機</strong>：開場破冰、分隊叫陣、宣布冠軍<br><strong>秘訣</strong>：節奏快、語調上揚、丹田發力！<br><em>「尖叫聲借給我——！」</em></p>
+        </div>
+        <div class="card">
+          <h3>⚖️ 二檔：清楚中檔</h3>
+          <p><strong>時機</strong>：說明複雜遊戲規則、流程指引<br><strong>秘訣</strong>：速度放慢、咬字清晰、語氣篤定，讓後排長輩也聽得懂！</p>
+        </div>
+        <div class="card cyan">
+          <h3>🕊️ 三檔：溫馨低檔</h3>
+          <p><strong>時機</strong>：營火晚會收尾、心得分享、感恩<br><strong>秘訣</strong>：聲音放柔、尾音拉長、注入真摯感情。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 13 -->
+  <section class="slide" data-notes="示範講一段充滿『然後、那個、基本上』的話，再示範『閉嘴停頓 1 秒』的大將之風！">
+    <div class="slide-top">
+      <span class="module-pill">🎤 模組二之二｜【聲】贅字粉碎機</span>
+    </div>
+    <h2 class="slide-title">消滅口頭禪：<span class="hl">把「然後」換成「停頓 1 秒」！</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card warn">
+          <h3>🚫 最常犯的四大贅字</h3>
+          <ul>
+            <li>「<strong>然後</strong>……我們接下來要……」</li>
+            <li>「<strong>那個</strong>……請大家看一下……」</li>
+            <li>「<strong>對、對、對</strong>……就是這樣……」</li>
+            <li>「<strong>基本上</strong>呢……這個遊戲……」</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <h3>✨ 必殺技：自信停頓 1 秒鐘</h3>
+          <ul>
+            <li>想說「然後」的瞬間 ➔ <strong>直接閉嘴微笑 1 秒</strong></li>
+            <li>用<strong>「留白＋堅定眼神」</strong>代替贅字</li>
+            <li>觀眾不會覺得你卡住，反而覺得你<strong>氣場超穩</strong>！</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 14 -->
+  <section class="slide theme-practice" data-timer="180" data-notes="10:09-10:14（練 5 分鐘）先帶全場一起喊三種檔位（2 分鐘），再讓搭檔兩兩體驗 30 秒贅字挑戰（3 分鐘）。">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 3｜【聲】三檔變速＋贅字挑戰（5 分鐘）</span>
+      <div class="timer-box" data-default="180"></div>
+    </div>
+    <h2 class="slide-title">任務 A 三檔切換 ＆ <span class="hl">任務 B 30 秒零贅字挑戰</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🎙️ 任務 A：一句話三種檔位（2 min）</h3>
+          <p>全場一起說：<br><strong style="color:var(--accent-yellow); font-size:1.5rem;">「接下來，我們要進入下一個活動！」</strong></p>
+          <ul style="margin-top:10px;">
+            <li>講師喊 <strong>🚀 高檔！</strong> ➔ 狂歡尖叫版</li>
+            <li>講師喊 <strong>⚖️ 中檔！</strong> ➔ 清楚沉穩版</li>
+            <li>講師喊 <strong>🕊️ 低檔！</strong> ➔ 溫柔感性版</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <h3>⏱️ 任務 B：30 秒贅字挑戰（3 min）</h3>
+          <p>固定搭檔：A 講 30 秒<strong>「今天早餐吃什麼」</strong></p>
+          <ul style="margin-top:10px;">
+            <li>B 舉手指幫忙算出現幾次「然後／那個／對」</li>
+            <li>交換再挑戰一次，目標 <strong>0 贅字</strong>！</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card bonus fragment">
+        <h3>🔥 進階加碼</h3>
+        <p>題目換成<strong>「今天晚會要結束了」</strong>，30 秒內從 🚀 高檔一路順暢降到 🕊️ 低檔，而且 <strong>0 贅字</strong>！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 15 -->
+  <section class="slide" data-notes="10:15-10:19（講 4 分鐘）為什麼台下會滑手機？因為主持人都在看天花板、看地板、或只看熟人！">
+    <div class="slide-top">
+      <span class="module-pill">🎤 模組二之三｜10:15 - 10:25 舞台魅力三大神器【神】</span>
+    </div>
+    <h2 class="slide-title">【神】眼神抓心術：<span class="hl">W 型掃描 ＋ 3 秒定焦</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card cyan">
+          <h3>👀 W 字型全場掃描法</h3>
+          <p>視線軌跡：<strong>左後 ➔ 左前 ➔ 中央 ➔ 右前 ➔ 右後</strong></p>
+          <ul style="margin-top:12px;">
+            <li>邊角與後排的夥伴最容易覺得被忽略</li>
+            <li>❌ 兩大禁忌：只看熟人、緊張盯天花板或講稿</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <h3>🎯 3 秒定焦勾心術</h3>
+          <p>講一個完整句子時，<strong>真誠看著一位觀眾滿 3 秒</strong>，等他對你點頭或微笑再移開！</p>
+          <ul style="margin-top:12px;">
+            <li>只掃過 0.5 秒 ＝ 沒人覺得你在看他</li>
+            <li>被你看滿 3 秒的人，<strong>整場都不好意思滑手機！</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 16 -->
+  <section class="slide theme-practice" data-timer="300" data-notes="10:19-10:24（練 5 分鐘）固定小組內輪流當 30 秒主持，新生可先當觀眾。最後問：沒被看到時你想做什麼？">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 4｜【神】被看到就舉手（5 分鐘）</span>
+      <div class="timer-box" data-default="300"></div>
+    </div>
+    <h2 class="slide-title">小組練習：<span class="hl">被看滿 3 秒就舉手！</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>🎤 主持人任務（每人輪流 30 秒）</h3>
+          <ul>
+            <li>主題：<strong>「介紹我最喜歡的一道素食」</strong></li>
+            <li>邊講邊用 <strong>W 型掃描＋3 秒定焦</strong> 看組員</li>
+            <li>新生夥伴可以選擇先當觀眾，準備好再上！</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>🙋 觀眾任務</h3>
+          <ul>
+            <li>只要感覺主持人看著你<strong>滿 3 秒 ➔ 立刻舉手！</strong></li>
+            <li>30 秒結束時，<strong>從頭到尾沒被看到的人</strong>請舉手</li>
+            <li>聊聊看：「沒被看到的時候，你心裡想做什麼？」</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card bonus fragment">
+        <h3>🔥 進階加碼（輪到資深夥伴主持時）</h3>
+        <p>觀眾故意低頭滑手機、跟旁邊交頭接耳，主持人必須用<strong>眼神定焦＋熱情點名</strong>把人拉回來！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 17 -->
+  <section class="slide" data-notes="10:25-10:29（講 4 分鐘）道場最常辦的 4 種晚會，以及團體團康 vs 表演型團康的關鍵區別！">
+    <div class="slide-top">
+      <span class="module-pill">🌊 模組三之一｜10:25 - 10:31 佛堂四大晚會 ＆ 兩種團康</span>
+    </div>
+    <h2 class="slide-title">佛堂四大晚會型態 ＆ <span class="hl">兩種團康定位</span></h2>
+    <div class="slide-body">
+      <div class="grid-4">
+        <div class="card highlight">
+          <h3>👋 迎新晚會</h3>
+          <p><strong>目標</strong>：打破防備、趣味破冰<br><strong>調性</strong>：輕鬆歡樂（⚖️ 中檔）<br><strong>團康</strong>：<strong>團體團康</strong>（全員破冰）</p>
+        </div>
+        <div class="card fragment" style="border-color:#f43f5e; background:rgba(244,63,94,0.12);">
+          <h3 style="color:#fda4af;">🔥 營火晚會</h3>
+          <p><strong>目標</strong>：凝聚熱血、釋放青春<br><strong>調性</strong>：極致狂歡（🚀 狂歡高檔）<br><strong>團康</strong>：<strong>團體＋表演型</strong>（PK戰舞）</p>
+        </div>
+        <div class="card cyan fragment">
+          <h3>🎭 戲劇晚會（表演＋穿插串場）</h3>
+          <p><strong>痛點解惑</strong>：❌ 整場都看戲劇？台下看兩齣就累了！<br>
+          👉 <strong>主持核心</strong>：學員在台上演，但<strong>組與組換場、道具卡住時，主持人在台下穿插「短團康／即興互動」做串場</strong>！台下絕不乾坐，笑聲不斷！</p>
+        </div>
+        <div class="card fragment" style="border-color:#a855f7; background:rgba(168,85,247,0.12);">
+          <h3 style="color:#d8b4fe;">🌌 星空晚會</h3>
+          <p><strong>目標</strong>：真誠談心、感恩同修<br><strong>調性</strong>：走心沉澱（🕊️ 溫馨低檔）<br><strong>團康</strong>：<strong>極少團康</strong>（燭光與分享）</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card cyan fragment">
+          <h3>👥 團體團康（全員動起來）</h3>
+          <p>全場在座位或圍圈投入體驗。主持核心：<strong>指令極簡、由慢到快、帶動整體</strong>！</p>
+        </div>
+        <div class="card highlight fragment">
+          <h3>🎭 表演型團康（少數上台）</h3>
+          <p>少數人或小組被 cue 上台。主持核心：<strong>接拋笑點、保護學員不尷尬、順暢墊檔</strong>！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 18 -->
+  <section class="slide theme-practice" data-timer="120" data-notes="10:29-10:31（練 2 分鐘）大螢幕出題！請搭檔看下方 4 個活動情境，討論 30 秒：分別該送進哪種晚會？比出手指 1/2/3/4 搶答，點擊按鈕揭曉！特別點出情境 C：戲劇晚會不能整場看戲，中間必須穿插團康串場！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 5｜晚會實境大配對（2 分鐘）</span>
+      <div class="timer-box" data-default="120"></div>
+    </div>
+    <h2 class="slide-title">晚會實境大配對：<span class="hl">這 4 個活動情境，分別適合哪種晚會？</span></h2>
+    <div class="slide-body">
+      <div class="card bonus" style="padding: 8px 16px; margin-bottom: 8px; text-align: center;">
+        <p style="font-size: 1.08rem; font-weight: 700; color: var(--accent-yellow); margin: 0;">
+          💬 【搭檔討論 30 秒】任選一題比手指：① 👋 迎新　② 🔥 營火　③ 🎭 戲劇　④ 🌌 星空 ➔ 點下方按鈕看答案！
+        </p>
+      </div>
+      <div class="grid-4" id="pairCards">
+        <div class="card" data-ans="① 👋 迎新晚會（全員破冰）" style="transition: all 0.35s ease;">
+          <h3 style="color:var(--accent-cyan); margin-bottom:6px;">🅰️ 活動情境 A</h3>
+          <p style="font-size: 0.98rem; line-height: 1.45;">全場起立！全體圍圈玩「二選一趣味站邊（如火鍋加不加芋頭）」，打破新舊生陌生防備！</p>
+          <div class="ans-box" style="margin-top:10px; padding:6px 10px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:800; color:var(--text-muted); font-size:0.95rem;">
+            ❓ 哪種晚會？
+          </div>
+        </div>
+        <div class="card" data-ans="② 🔥 營火晚會（狂歡大高潮）" style="transition: all 0.35s ease;">
+          <h3 style="color:var(--accent-orange); margin-bottom:6px;">🅱️ 活動情境 B</h3>
+          <p style="font-size: 0.98rem; line-height: 1.45;">熊熊營火升起！各組揮舞小隊旗，120% 丹田大喊隊呼＋全場百人熱血大跳戰舞！</p>
+          <div class="ans-box" style="margin-top:10px; padding:6px 10px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:800; color:var(--text-muted); font-size:0.95rem;">
+            ❓ 哪種晚會？
+          </div>
+        </div>
+        <div class="card" data-ans="③ 🎭 戲劇晚會（換場穿插短團康！）" style="transition: all 0.35s ease;">
+          <h3 style="color:var(--accent-yellow); margin-bottom:6px;">🅲 活動情境 C</h3>
+          <p style="font-size: 0.98rem; line-height: 1.45;">第二組剛演完，第三組布景卡在後台！主持人立刻在台下帶 1 分鐘節奏拍手團康墊檔！</p>
+          <div class="ans-box" style="margin-top:10px; padding:6px 10px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:800; color:var(--text-muted); font-size:0.95rem;">
+            ❓ 哪種晚會？
+          </div>
+        </div>
+        <div class="card" data-ans="④ 🌌 星空晚會（走心談心感恩）" style="transition: all 0.35s ease;">
+          <h3 style="color:#d8b4fe; margin-bottom:6px;">🅳 活動情境 D</h3>
+          <p style="font-size: 0.98rem; line-height: 1.45;">全場熄燈、微光閃爍，學員哽咽分享同修照顧的感動，最後主持引領面向佛前行禮。</p>
+          <div class="ans-box" style="margin-top:10px; padding:6px 10px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:800; color:var(--text-muted); font-size:0.95rem;">
+            ❓ 哪種晚會？
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; gap:16px; align-items:center; margin-top:8px;">
+        <button class="timer-btn" onclick="revealPairingAnswers()" style="font-size:1.15rem; padding:12px 24px; white-space:nowrap;">✨ 點此一鍵揭曉配對答案</button>
+        <div class="card bonus fragment" style="flex:1; padding:8px 14px;">
+          <p style="margin:0; font-size:0.95rem;">🔥 <strong>思考加碼</strong>：戲劇晚會如果「都在看戲」台下容易累！<strong>主持人的靈魂價值就是「在節目換場時穿插短團康互動」！</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 19 -->
+  <section class="slide" data-notes="10:31-10:34（講 3 分鐘）活動結束切忌冷場切掉！三大收尾：1.掌聲儀式（愛的鼓勵） 2.具體點評（講出剛剛看到的微小亮點，誰跳起來、誰神救場） 3.順勢昇華。點出：學員拼命不是要分勝負，而是要被看見！">
+    <div class="slide-top">
+      <span class="module-pill">🌊 模組三之二｜活動結束收尾神技</span>
+    </div>
+    <h2 class="slide-title">活動結束別急著走！黃金 30 秒 <span class="hl">「收尾反饋三部曲」</span></h2>
+    <div class="slide-body">
+      <div class="card warn" style="padding: 8px 16px; margin-bottom: 4px;">
+        <p style="font-size: 1.02rem;">❌ <strong>新手最大地雷</strong>：活動剛結束就急著說「好，遊戲結束請回座／請看下一個節目」➔ <strong>全場熱血瞬間斷崖式冷掉！</strong></p>
+      </div>
+      <div class="grid-3">
+        <div class="card highlight fragment">
+          <h3>1️⃣ 👏 掌聲儀式（愛的鼓勵）</h3>
+          <p><strong>接住熱情，把能量推到最高點！</strong></p>
+          <ul style="margin-top: 8px; font-size: 0.95rem; line-height: 1.45;">
+            <li>「愛的鼓勵一起來——（啪啪・啪啪啪・啪啪啪啪・啪啪！）」</li>
+            <li>「雙手借給我，給全場最瘋的自己熱烈歡呼！」</li>
+            <li>「轉過去給搭檔比個讚：『有你真好，你剛剛太強了！』」</li>
+          </ul>
+        </div>
+        <div class="card cyan fragment">
+          <h3>2️⃣ 👀 具體亮點點評（不說空話）</h3>
+          <p><strong>講出剛才巡場親眼看到的 1~2 個真實畫面！</strong></p>
+          <ul style="margin-top: 8px; font-size: 0.95rem; line-height: 1.45;">
+            <li>「剛剛第 3 組為了學叫聲，整個人跳起來拍翅膀，太拼了！」</li>
+            <li>「第 2 組卡住時，大家立刻幫他拍腿喊開機，這就是道場夥伴的義氣！」</li>
+            <li>「剛才最害羞的新夥伴叫得最大聲，這就是舞台的魔力！」</li>
+          </ul>
+        </div>
+        <div class="card highlight fragment">
+          <h3>3️⃣ 🚀 昇華過渡（順接下一段）</h3>
+          <p><strong>把笑聲昇華成團隊默契，無縫過渡！</strong></p>
+          <ul style="margin-top: 8px; font-size: 0.95rem; line-height: 1.45;">
+            <li>「有這樣的向心力，我們今晚的晚會絕對無敵！」</li>
+            <li>「既然大家胃口被養大了，更刺激的在後頭！」</li>
+            <li>👉 <strong>這就是串場【接・拋・引】中「接」的精髓！</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="slogan-footer" style="align-self:center; margin-top: 4px;">✨ 台下學員拼命流汗，不是為了分勝負，而是為了被看見、被肯定！</div>
+    </div>
+  </section>
+
+  <!-- Slide 20 -->
+  <section class="slide" data-notes="10:31-10:33（講 2 分鐘）新手最怕上一段結束只會講『好，接下來下一個節目』，用接・拋・引三句話就變高手！">
+    <div class="slide-top">
+      <span class="module-pill">🌊 模組三之二｜10:31 - 10:38 串場萬能三字訣</span>
+    </div>
+    <h2 class="slide-title">告別乾巴巴報幕！萬用串場公式 <span class="hl">「接・拋・引」</span></h2>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card highlight fragment">
+          <h3>1️⃣ 【接】Catch（收尾反饋）</h3>
+          <p><strong>先給愛的鼓勵 ＋ 點評剛才看到的具體亮點</strong></p>
+          <p style="margin-top:8px; color:var(--accent-cyan); font-size:0.92rem;">👏 愛的鼓勵 ＋ 講出剛剛巡場看到的感動/搞笑畫面</p>
+          <p style="margin-top:8px; color:var(--accent-yellow);">💬 「哇！剛剛阿明摔倒還爬起來搶球，那個拼勁真的全場第一！」</p>
+        </div>
+        <div class="card cyan fragment">
+          <h3>2️⃣ 【拋】Throw</h3>
+          <p><strong>把情緒拋給台下觀眾</strong></p>
+          <p style="margin-top:12px; color:var(--accent-cyan);">💬 「第一組的夥伴你們說，這種精神給不給過？！」</p>
+        </div>
+        <div class="card highlight fragment">
+          <h3>3️⃣ 【引】Lead</h3>
+          <p><strong>順暢帶出下一個環節</strong></p>
+          <p style="margin-top:12px; color:var(--accent-yellow);">💬 「既然大家胃口被養大了，下一關考驗更刺激，請看大螢幕——！」</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 21 -->
+  <section class="slide theme-practice" data-timer="60" data-notes="10:33-10:37（練 4 分鐘）講師明確宣佈指令：『請大家先在座位上跟搭檔討論 1 分鐘，不要急著上台！先把三句話寫下來，鈴響後我會抽 2 組上台秀！』提醒：接笑點只誇對方拼，不取笑出糗！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 6｜「接・拋・引」串場實戰（座位討論 ➔ 抽籤上台）</span>
+      <div class="timer-box" data-default="60"></div>
+    </div>
+    <h2 class="slide-title">搭檔【先座位討論 1 分鐘】擬台詞 <span class="hl">➔ 鈴響抽 2 組上台秀！</span></h2>
+    <div class="slide-body">
+      <div class="card highlight" style="padding:12px 20px; text-align:center;">
+        <p style="font-size:1.25rem; font-weight:800; line-height:1.4;">
+          📌 <span style="color:var(--accent-cyan)">【第 1 步・座位討論 60 秒】</span>搭檔任選 1 題擬「接・拋・引」三句台詞（<strong>【接】請融入愛的鼓勵或剛才觀察到的具體亮點！</strong>）➔
+          <span style="color:var(--accent-yellow)">【第 2 步・抽籤登台】</span>鈴響後抽 2 組上台，一人一句現場秀！
+        </p>
+      </div>
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>👋 題目 1：迎新晚會・銜接全場帶動跳</h3>
+          <p>剛體驗完「名詞聲音動作」，全場學怪叫、拍翅膀肢體完全熱開！主持要用<strong>接・拋・引</strong>順暢銜接接下來的<strong>「全場帶動跳（舞蹈）」</strong>！</p>
+        </div>
+        <div class="card" style="border-color:#f43f5e; background:rgba(244,63,94,0.12);">
+          <h3>🔥 題目 2：營火晚會・戰舞嗨炸</h3>
+          <p>第一組剛表演完超動感開場戰舞，尖叫聲快把屋頂掀開，全場嗨翻！</p>
+        </div>
+        <div class="card cyan">
+          <h3>🎭 題目 3：戲劇晚會・道具卡住</h3>
+          <p>第二組演完下台，第三組大型道具布景卡在後台，必須墊檔 1 分鐘！</p>
+        </div>
+        <div class="card" style="border-color:#a855f7; background:rgba(168,85,247,0.12);">
+          <h3>🌌 題目 4：星空晚會・感性落淚</h3>
+          <p>營火微光閃爍，一位學員剛哽咽分享完隊輔無私照顧他的感動，全場安靜。</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card warn" style="padding:12px 20px;">
+          <p>⚠️ <strong>分寸提醒</strong>：「接」笑點時，<strong>只誇對方很拼、很可愛，絕不取笑對方出糗！</strong></p>
+        </div>
+        <div class="card bonus fragment" style="padding:12px 20px;">
+          <p>🔥 <strong>進階加碼</strong>：主 Key 講「接」，副 Key 不准事先討論，當場即興接「拋・引」！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 22 -->
+  <section class="slide theme-temple" data-notes="10:38-10:41（講 3 分鐘）請大家拿出『佛堂用語小卡』對照。強調平時嗨翻天，關鍵時刻懂禮節最讓人佩服！">
+    <div class="slide-top">
+      <span class="module-pill">⭐ 模組三之三｜10:38 - 10:45 道場專屬操持眉角</span>
+    </div>
+    <h2 class="slide-title">佛堂主持避雷針：<span class="hl">稱謂・遞麥・一秒變頻</span></h2>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card highlight">
+          <h3>🙏 稱謂不踩雷（對照小卡）</h3>
+          <ul>
+            <li><strong>點傳師</strong> ➔ 「恭請○點傳師<strong>慈悲賜勉／開示</strong>」（❌ 不說請講話）</li>
+            <li><strong>講師／壇主</strong> ➔ 「恭請○講師<strong>慈悲勉勵</strong>」</li>
+            <li>尊稱大眾<strong>「各位前賢」</strong>，自謙<strong>「後學」</strong></li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>🎤 遞麥克風與站位禮節</h3>
+          <ul>
+            <li><strong>雙手奉上</strong>：麥頭朝自己、手柄朝前賢、微鞠躬</li>
+            <li>前賢上台時，主持人<strong>退至舞台下首（兩側）</strong>側身恭聽</li>
+            <li>眼角餘光隨時留意前賢手勢與時間</li>
+          </ul>
+        </div>
+        <div class="card highlight">
+          <h3>🎚️ 「一秒變頻術」</h3>
+          <ul>
+            <li>狂歡到頂點時，點傳師上台或轉入佛前感恩</li>
+            <li>口訣：<strong>深呼吸 1 秒 ➔ 收起嬉鬧 ➔ 站穩挺胸 ➔ 切換溫暖莊嚴檔</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 23 -->
+  <section class="slide theme-practice" data-timer="240" data-notes="10:41-10:45（練 4 分鐘）先提醒：扮演點傳師的人自然站好接麥就好，不用演、不學特定前賢！講師喊『點傳師到！』全場同時深呼吸變頻＋雙手遞麥。">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 7｜一秒變頻＋雙手遞麥（4 分鐘）</span>
+      <div class="timer-box" data-default="240"></div>
+    </div>
+    <h2 class="slide-title">搭檔演練：<span class="hl">從 100% 狂歡「一秒變頻」恭請點傳師！</span></h2>
+    <div class="slide-body">
+      <div class="flow-row">
+        <div class="flow-step">
+          <span class="num">1</span>
+          <h4>🚀 狂歡高檔</h4>
+          <p>A 拿水瓶麥克風大喊：<br><strong>「今晚的總冠軍就是——！」</strong></p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step">
+          <span class="num">2</span>
+          <h4>🔔 突發信號</h4>
+          <p>講師喊：<strong>「點傳師到！」</strong><br>A 立刻<strong>深呼吸 1 秒站穩</strong></p>
+        </div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step">
+          <span class="num">3</span>
+          <h4>🕊️ 莊嚴變頻＋遞麥</h4>
+          <p><strong>「各位前賢，現在恭請點傳師慈悲賜勉，大家掌聲歡迎！」</strong><br>雙手遞麥（手柄朝對方）＋退至一側</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card warn">
+          <p>🙏 <strong>重要叮嚀</strong>：扮演點傳師的人<strong>自然站好、接麥就好，不用演，也不要學特定前賢</strong>。做完交換！</p>
+        </div>
+        <div class="card bonus fragment">
+          <p>🔥 <strong>進階加碼</strong>：點傳師賜勉結束後，再練習用溫暖沉穩的語氣自然接回下一個活動！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 24 -->
+  <section class="slide theme-practice" data-timer="900" data-notes="10:45-11:00（15分鐘）中場休息兼各組抽題備戰！發下 A~D 題目卡與段落分工表，提醒每組指定 1 人等一下錄影。">
+    <div class="slide-top">
+      <span class="module-pill">☕ 中場休息 ＆ 抽題備戰｜10:45 - 11:00</span>
+      <div class="timer-box" data-default="900"></div>
+    </div>
+    <h2 class="slide-title">喝水休息 ＋ <span class="hl">小組 3 分鐘實戰 PK 備戰！</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>📋 休息這 15 分鐘要做什麼？</h3>
+          <ul>
+            <li>小隊長來抽 <strong>【情境題目卡 A / B / C / D】</strong></li>
+            <li>填寫 <strong>段落分工表</strong>（每位新生負責一個明確小段落！）</li>
+            <li>指定組內 <strong>1 位夥伴負責用手機錄影</strong></li>
+            <li>排練走位，把「身・聲・神・接拋引・變頻」全用上！</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>👥 段落分工建議</h3>
+          <ul>
+            <li>🙋 <strong>新生 A</strong>：開場第一句問候＋帶動拍手</li>
+            <li>🙋 <strong>新生 B</strong>：宣布一條規則／帶一個動作</li>
+            <li>🧑 <strong>小隊長（主 Key）</strong>：串場「接拋引」＋處理突發考驗</li>
+            <li>🎙️ <strong>副 Key</strong>：神助攻、音效、遞麥克風</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 25 -->
+  <section class="slide" data-timer="180" data-pk="true" data-notes="11:00-11:35（35分鐘）這個計時器有設 PK 鈴聲：剩 60 秒（滿 2 分鐘）會響短鈴，0 秒（滿 3 分鐘）會響長鈴！講評時優先肯定新生亮點。">
+    <div class="slide-top">
+      <span class="module-pill">🏆 模組四｜11:00 - 11:35 舞台即戰力 PK 總驗收</span>
+      <div class="timer-box" data-default="180" data-pk="true"></div>
+    </div>
+    <h2 class="slide-title">4 大情境實戰 PK <span class="hl">（2 分短鈴・3 分長鈴）</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>⚡ 上台演練規則</h3>
+          <ul>
+            <li>每組 <strong>3 分鐘登台實戰</strong>（右上角計時器自動響鈴）</li>
+            <li>講師 <strong>3 分鐘三明治講評</strong>（讚亮點 ➔ 微調 ➔ 激勵）</li>
+            <li>📱 <strong>手機錄影</strong>：組員幫忙錄下全程，講評與回家可回看</li>
+            <li>⏱️ 時間充裕時，針對建議當場<strong>「重來 30 秒」</strong>驗收！</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>📊 評分比重（活力 70% ＋ 禮節應變 30%）</h3>
+          <ul>
+            <li><strong>舞台活力與熱情度（40%）</strong>：120% 能量、笑容、感染力</li>
+            <li><strong>台風走位與流暢度（30%）</strong>：麥克風 45 度、三角走位、接拋引、0 贅字</li>
+            <li><strong>突發應變機智（15%）</strong>：幽默自嘲、只拿自己開玩笑</li>
+            <li><strong>佛堂禮節與變頻（15%）</strong>：稱謂正確、一秒變頻、雙手遞麥</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 26 -->
+  <section class="slide" data-notes="PK 進行時可停在這頁或上一頁。情境 C 上台前提醒：扮演點傳師的人自然站好接麥就好，不用演、不學特定前賢。若有資深學員的組表現太穩，到 1 分半時派助教遞上『加料卡 E』！">
+    <div class="slide-top">
+      <span class="module-pill">🏆 模組四｜四大體驗考題 ＋ 隱藏突襲卡</span>
+    </div>
+    <h2 class="slide-title">四組實戰情境 <span class="hl">大揭秘！</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card highlight">
+          <h3>🅰️ 👋 迎新晚會：暖身銜接全場帶動跳</h3>
+          <p>剛帶完名詞聲音動作放開身心，2 分鐘用接拋引帶動全場起立進入熱血「全場帶動跳」！<br>🔥 <strong>加料</strong>：第二排有兩位新道親害羞抱胸不肯站起來跳舞，主持如何自嘲鼓勵化解？</p>
+        </div>
+        <div class="card" style="border-color:#f43f5e; background:rgba(244,63,94,0.12);">
+          <h3>🅱️ 🔥 營火晚會：營火開場與高能競賽</h3>
+          <p>營火升起，用 120% 狂歡高檔帶分組隊呼較勁！<br>🕊️ <strong>佛堂加料</strong>：炒熱火藥味同時，帶一句注意火光、互助不推擠的安全道氣！</p>
+        </div>
+        <div class="card cyan">
+          <h3>🅲 🎭 戲劇晚會：道具卡住墊檔 ＋ 點傳師突臨 ⭐</h3>
+          <p>後台道具卡住需墊檔 1 分鐘！拿出零道具團康與接拋引撐場！<br>🕊️ <strong>佛堂加料</strong>：嗨到一半點傳師抵達，15 秒內<strong>一秒變頻＋雙手遞麥</strong>！</p>
+        </div>
+        <div class="card" style="border-color:#a855f7; background:rgba(168,85,247,0.12);">
+          <h3>🅳 🌌 星空晚會：微光談心 ＋ 佛前行禮收心 ⭐</h3>
+          <p>切換溫暖低檔，用真誠故事打破沉默、引導分享感動。<br>🕊️ <strong>佛堂加料</strong>：順暢引領全體起立面向佛前行三鞠躬禮，溫馨圓滿收心！</p>
+        </div>
+      </div>
+      <div class="card bonus fragment">
+        <p>🔥 <strong>隱藏突襲卡 E（資深組限定）</strong>：演練到 1 分半時，助教遞紙條<strong>「前賢交代後面節目砍 10 分鐘，直接進頒獎！」</strong>考驗不慌張順暢轉場！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 27 -->
+  <section class="slide theme-practice" data-timer="60" data-notes="11:35-11:50（15分鐘）先翻車、後教招！點『轉動翻車輪盤』抽出狀況，助教當場演出狀況，抽學員（可拉一位隊友）救場 1 分鐘！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 隨堂練習 8｜模組五 11:35 - 11:50 翻車輪盤（先救再教！）</span>
+      <div class="timer-box" data-default="60"></div>
+    </div>
+    <h2 class="slide-title">翻車了誰來救？<span class="hl">（助教突襲 ➔ 學員即救 ➔ 揭曉錦囊）</span></h2>
+    <div class="slide-body">
+      <div class="roulette-grid" id="rouletteGrid">
+        <div class="roulette-card" onclick="selectRoulette(0)">
+          <div class="icon">🥶</div>
+          <h4>1. 冷場尷尬</h4>
+          <p>拋問題台下一片死寂沒人理</p>
+        </div>
+        <div class="roulette-card" onclick="selectRoulette(1)">
+          <div class="icon">🔇</div>
+          <h4>2. 麥克風斷音</h4>
+          <p>講到一半麥克風突然沒聲音</p>
+        </div>
+        <div class="roulette-card" onclick="selectRoulette(2)">
+          <div class="icon">⏰</div>
+          <h4>3. 活動大超時</h4>
+          <p>後台舉牌「只剩 1 分鐘！」</p>
+        </div>
+        <div class="roulette-card" onclick="selectRoulette(3)">
+          <div class="icon">🤪</div>
+          <h4>4. 太嗨失控</h4>
+          <p>台下吵翻天完全拉不回來</p>
+        </div>
+        <div class="roulette-card" onclick="selectRoulette(4)">
+          <div class="icon">👅</div>
+          <h4>5. 台上大口誤</h4>
+          <p>唸拗口小卡舌頭打結講錯話</p>
+        </div>
+      </div>
+      <div class="card highlight" id="rouletteStatus" style="text-align:center;">
+        <p>🎲 點擊上方任一狀況，或按 <button class="timer-btn" onclick="spinRoulette()" style="font-size:1.1rem; margin:0 8px;">🎯 隨機轉動輪盤</button> 抽出下一題！<strong>（被抽到可以拉 1 位隊友一起上台救！記得：只拿自己開玩笑）</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 28 -->
+  <section class="slide" data-notes="每種狀況讓學員救完之後，點一下對應卡片揭曉標準錦囊話術！">
+    <div class="slide-top">
+      <span class="module-pill">💣 模組五｜五大翻車現場救場錦囊（點擊卡片揭曉）</span>
+      <button class="nav-btn" onclick="revealAll('.rescue-card')">全部揭曉</button>
+    </div>
+    <h2 class="slide-title">拆彈專家！<span class="hl">五大翻車救場萬用話術</span></h2>
+    <div class="slide-body">
+      <div class="grid-2">
+        <div class="card reveal-item covered rescue-card" onclick="this.classList.toggle('covered')">
+          <h3>1️⃣ 全場死寂沒人理 ➔ 降階幽默法</h3>
+          <p class="answer">💬 「哇大家連呼吸都屏住了！那換個問法：<strong>剛剛有聽懂我講話、還在呼吸的，對我眨一下眼睛就好！</strong>」</p>
+        </div>
+        <div class="card reveal-item covered rescue-card" onclick="this.classList.toggle('covered')">
+          <h3>2️⃣ 麥克風斷音無聲 ➔ 肺活量展示法</h3>
+          <p class="answer">💬 （丹田大聲喊）「<strong>看來麥克風被大家熱情震懾了！聽得到我原音的揮手！</strong>掌聲給音控前賢施展魔法！」</p>
+        </div>
+        <div class="card reveal-item covered rescue-card" onclick="this.classList.toggle('covered')">
+          <h3>3️⃣ 活動超時被壓縮 ➔ 大氣刪減法</h3>
+          <p class="answer">💬 「因為大家太熱情把時間偷走了！接下來我們直接進入最刺激的<strong>『一局定勝負・閃電精華加碼賽』</strong>！」</p>
+        </div>
+        <div class="card reveal-item covered rescue-card" onclick="this.classList.toggle('covered')">
+          <h3>4️⃣ 現場過嗨太吵鬧 ➔ 節奏擊掌＋氣音法</h3>
+          <p class="answer">💬 打出<strong>「啪・啪・啪啪啪」</strong>節奏引導反射跟拍；或壓低氣音：<strong>「現在聽得到我聲音的小隊偷偷加 100 分…」</strong></p>
+        </div>
+      </div>
+      <div class="card highlight reveal-item covered rescue-card" onclick="this.classList.toggle('covered')">
+        <h3>5️⃣ 台上大口誤吃螺絲 ➔ 時事斷網／手動模式自嘲法</h3>
+        <p class="answer">💬 「哎呀！<strong>我的大腦剛剛斷網了，現在切換成手動模式！</strong> 大家當作那是剛剛的倒帶特效，現在正式重播！」</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 29 -->
+  <section class="slide" data-notes="11:50-11:54（4分鐘）回扣開場的精神標語，把今天熱血的技巧昇華為活動組的行無畏施與道氣涵養。">
+    <div class="slide-top">
+      <span class="module-pill">🔥 模組六｜11:50 - 12:00 熱血結語・事上練心</span>
+    </div>
+    <h2 class="slide-title">能瘋能玩是熱情，<span class="hl">能收能靜是涵養！</span></h2>
+    <div class="slide-body" style="align-items:center; text-align:center;">
+      <div class="big-quote" style="font-size:2.3rem; padding:30px 42px;">
+        「世人笑我太瘋癲，我笑他人看不穿。<br>
+        學習吃苦如吃補，才能轉逆境為增上緣。」
+      </div>
+      <div class="grid-2" style="max-width:1000px; width:100%; text-align:left;">
+        <div class="card cyan">
+          <h3>🌟 舞台就是我們練心的拜墊</h3>
+          <p>在台上拿著麥克風帶給大家歡喜、破除陌生人的恐懼，就是最棒的<strong>「行無畏施」</strong>！</p>
+        </div>
+        <div class="card highlight">
+          <h3>💪 活動組最酷的模樣</h3>
+          <p>台前笑聲不斷、幕後吃苦承擔、關鍵時刻懂禮節知分寸——這就是最有道氣的活動組！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 30 -->
+  <section class="slide theme-practice" data-timer="240" data-notes="11:54-12:00（6分鐘）派發三項課後任務，最後請 3~4 位自願者上台喊出『一句話主持宣言』，12:00 準時帥氣下課！">
+    <div class="slide-top">
+      <span class="module-pill">🟡 模組六｜課後任務 ＆ 一句話主持宣言（12:00 準時下課）</span>
+      <div class="timer-box" data-default="240"></div>
+    </div>
+    <h2 class="slide-title">12/12 綜藝活動全員實戰！<span class="hl">現在，換你上台宣言！</span></h2>
+    <div class="slide-body">
+      <div class="grid-3">
+        <div class="card">
+          <h3>🎯 任務 1（個人）</h3>
+          <p>下次活動組聚會，每個人輪流用<strong>「名詞・聲音・動作」</strong>帶一次暖場！</p>
+        </div>
+        <div class="card cyan">
+          <h3>📝 任務 2（小組）</h3>
+          <p>每組交一份 <strong>12/12 晚會 90 分鐘流程草稿</strong>（標出起承轉合＋主持分工），小隊長彙整！</p>
+        </div>
+        <div class="card">
+          <h3>📱 任務 3（回看）</h3>
+          <p>回家看今天 PK 的手機錄影，找出自己 <strong>1 個亮點 ＋ 1 個想微調的地方</strong>！</p>
+        </div>
+      </div>
+      <div class="card highlight" style="text-align:center; padding: 28px;">
+        <h3>🎤 一句話主持宣言（邀請 3～4 位勇士拿麥克風上台！）</h3>
+        <p style="font-size:1.85rem; font-weight:800; color:#fff; margin-top:8px;">
+          「大家好，我是 <span style="color:var(--accent-yellow)">○○○</span>，下次晚會我要挑戰 <span style="color:var(--accent-cyan)">＿＿＿＿＿＿</span>！」
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Speaker Notes Drawer -->
+<div class="notes-drawer" id="notesDrawer">
+  <h5>📋 講師提示（按 N 鍵開關）</h5>
+  <p id="notesText"></p>
+</div>
+
+<!-- Slide Overview Modal -->
+<div class="overview-modal" id="overviewModal">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2 style="font-size:1.8rem; color:var(--accent-yellow);">📑 29 頁投影片總覽（點擊直接跳頁，按 G 或 Esc 關閉）</h2>
+    <button class="timer-btn" onclick="toggleOverview()">關閉總覽 ✕</button>
+  </div>
+  <div class="overview-grid" id="overviewGrid"></div>
+</div>
+
+<!-- Bottom Navigation Bar -->
+<div class="bottom-bar">
+  <div class="progress-wrap">
+    <span id="slideCounter" style="font-weight:700; min-width:90px;">01 / 29</span>
+    <span id="fragHint" class="frag-hint"></span>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()" title="上一頁 (←)">◀ 上一頁</button>
+    <button class="nav-btn" onclick="nextSlide()" title="下一頁 (→ / 空白鍵)">下一頁 ▶</button>
+    <button class="nav-btn" onclick="toggleNotes()" title="講師提示 (N)">📋 講師提示 (N)</button>
+    <button class="nav-btn" onclick="toggleOverview()" title="全頁總覽 (G)">📑 總覽 (G)</button>
+    <button class="nav-btn" onclick="toggleFullscreen()" title="全螢幕 (F)">⛶ 全螢幕 (F)</button>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let current = 0;
+  let timerInterval = null;
+  let remainingSec = 0;
+  let activeTimerDisplay = null;
+  let activeTimerBtn = null;
+  let isPkTimer = false;
+
+  // Web Audio Bell Synthesizer (works 100% offline!)
+  function playBell(times = 1, duration = 0.6, freq = 880) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      for (let i = 0; i < times; i++) {
+        const start = ctx.currentTime + i * 0.35;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.35, start);
+        gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + duration);
+      }
+    } catch (e) {}
+  }
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  // Build timer widgets on slides
+  document.querySelectorAll('.timer-box').forEach((box) => {
+    const def = parseInt(box.dataset.default || '180', 10);
+    const pk = box.dataset.pk === 'true';
+    box.innerHTML = `
+      <span class="timer-display">${formatTime(def)}</span>
+      <button class="timer-btn start-btn">▶ 計時 (T)</button>
+      <button class="timer-btn secondary reset-btn">↺ 重設</button>
+      ${pk ? '<button class="timer-btn secondary bell-btn" title="手動響鈴">🔔 響鈴</button>' : ''}
+    `;
+    const disp = box.querySelector('.timer-display');
+    const startBtn = box.querySelector('.start-btn');
+    const resetBtn = box.querySelector('.reset-btn');
+    const bellBtn = box.querySelector('.bell-btn');
+
+    startBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSlideTimer(disp, startBtn, def, pk);
+    });
+    resetBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      stopTimer();
+      remainingSec = def;
+      disp.textContent = formatTime(def);
+      disp.classList.remove('urgent');
+      startBtn.textContent = '▶ 計時 (T)';
+    });
+    if (bellBtn) {
+      bellBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playBell(2, 0.7, 987.77);
+      });
+    }
+  });
+
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    if (activeTimerBtn) {
+      activeTimerBtn.textContent = '▶ 繼續 (T)';
+    }
+  }
+
+  function toggleSlideTimer(disp, btn, defSec, pk) {
+    if (timerInterval && activeTimerDisplay === disp) {
+      stopTimer();
+      return;
+    }
+    stopTimer();
+    if (activeTimerDisplay !== disp || remainingSec <= 0) {
+      const parts = disp.textContent.split(':');
+      const cur = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+      remainingSec = cur > 0 ? cur : defSec;
+    }
+    activeTimerDisplay = disp;
+    activeTimerBtn = btn;
+    isPkTimer = pk;
+    btn.textContent = '⏸ 暫停 (T)';
+
+    timerInterval = setInterval(() => {
+      remainingSec--;
+      if (remainingSec <= 15) {
+        disp.classList.add('urgent');
+      }
+      // PK short bell at 2 minutes elapsed (60s remaining out of 180s)
+      if (isPkTimer && remainingSec === 60) {
+        playBell(1, 0.5, 880);
+      }
+      if (remainingSec <= 0) {
+        remainingSec = 0;
+        disp.textContent = '00:00';
+        stopTimer();
+        btn.textContent = '⏰ 時間到！';
+        playBell(3, 0.8, 1046.5);
+        return;
+      }
+      disp.textContent = formatTime(remainingSec);
+    }, 1000);
+  }
+
+  function showSlide(index) {
+    if (index < 0 || index >= slides.length) return;
+    stopTimer();
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+
+    document.getElementById('slideCounter').textContent =
+      `${String(current + 1).padStart(2, '0')} / ${slides.length}`;
+    document.getElementById('progressFill').style.width =
+      `${((current + 1) / slides.length) * 100}%`;
+    document.getElementById('notesText').textContent =
+      slides[current].dataset.notes || '';
+
+    // Reset hidden bonus blocks on every slide entry
+    slides[current].querySelectorAll('.fragment').forEach(el => el.classList.remove('shown'));
+    updateFragHint();
+
+    // Highlight in overview
+    document.querySelectorAll('.overview-item').forEach((el, idx) => {
+      el.classList.toggle('current', idx === current);
+    });
+  }
+
+  function pendingFragments() {
+    return Array.from(slides[current].querySelectorAll('.fragment:not(.shown)'));
+  }
+
+  function updateFragHint() {
+    const n = pendingFragments().length;
+    document.getElementById('fragHint').textContent = n ? `🔥 還有 ${n} 個隱藏加碼（按下一步出現）` : '';
+  }
+
+  function nextSlide() {
+    const pending = pendingFragments();
+    if (pending.length) {
+      pending[0].classList.add('shown');
+      updateFragHint();
+      return;
+    }
+    showSlide(current + 1);
+  }
+  function prevSlide() { showSlide(current - 1); }
+
+  function toggleNotes() {
+    document.getElementById('notesDrawer').classList.toggle('open');
+  }
+
+  function toggleOverview() {
+    document.getElementById('overviewModal').classList.toggle('open');
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  // Pairing Reveal on Slide 18
+  let isPaired = false;
+  function revealPairingAnswers() {
+    const cards = document.querySelectorAll('#pairCards .card');
+    isPaired = !isPaired;
+    cards.forEach((c) => {
+      const box = c.querySelector('.ans-box');
+      if (isPaired) {
+        c.classList.add('highlight');
+        box.innerHTML = `<span style="color:var(--accent-yellow); font-size:1.02rem;">👉 ${c.dataset.ans}</span>`;
+        box.style.background = 'rgba(250, 204, 21, 0.16)';
+        box.style.border = '1px solid rgba(250, 204, 21, 0.45)';
+      } else {
+        c.classList.remove('highlight');
+        box.innerHTML = '❓ 哪種晚會？';
+        box.style.background = 'rgba(255,255,255,0.06)';
+        box.style.border = 'none';
+      }
+    });
+    if (isPaired) playBell(1, 0.4, 987.77);
+  }
+
+  // Crash Roulette on Slide 27
+  const roulettePrompts = [
+    '🥶 抽中【1. 冷場尷尬】：主持人問大家開不開心，台下全場故意木頭人面無表情不理你！請救場！',
+    '🔇 抽中【2. 麥克風斷音】：講話講到最嗨的時候，麥克風突然完全沒聲音！請救場！',
+    '⏰ 抽中【3. 活動大超時】：原本要玩 3 回合的遊戲，後台突然舉牌「只剩 1 分鐘必須結束」！請救場！',
+    '🤪 抽中【4. 太嗨失控】：剛玩完遊戲全場吵翻天，沒人聽主持人講話！請在 15 秒內收服全場！',
+    '👅 抽中【5. 台上大口誤】：請唸出拗口小卡「第四小隊四位隊輔帶來四十四秒四句聯」，並用『大腦斷網』時事梗幽默救場！'
+  ];
+
+  function selectRoulette(idx) {
+    const cards = document.querySelectorAll('#rouletteGrid .roulette-card');
+    cards.forEach((c, i) => c.classList.toggle('selected', i === idx));
+    document.getElementById('rouletteStatus').innerHTML =
+      `<p style="font-size:1.45rem; font-weight:800; color:var(--accent-yellow);">${roulettePrompts[idx]}</p>`;
+    playBell(1, 0.35, 880);
+  }
+
+  function spinRoulette() {
+    const cards = document.querySelectorAll('#rouletteGrid .roulette-card');
+    let count = 0;
+    const total = 12 + Math.floor(Math.random() * 5);
+    const spin = setInterval(() => {
+      const idx = count % cards.length;
+      cards.forEach((c, i) => c.classList.toggle('selected', i === idx));
+      playBell(1, 0.08, 600 + idx * 80);
+      count++;
+      if (count >= total) {
+        clearInterval(spin);
+        selectRoulette((total - 1) % cards.length);
+      }
+    }, 90);
+  }
+
+  function revealAll(selector) {
+    document.querySelectorAll(selector).forEach(el => el.classList.remove('covered'));
+  }
+
+  // Build Overview Grid
+  const ovGrid = document.getElementById('overviewGrid');
+  slides.forEach((s, idx) => {
+    const pill = s.querySelector('.module-pill')?.textContent || '';
+    const title = s.querySelector('.slide-title, .hero-title')?.textContent || `Slide ${idx + 1}`;
+    const item = document.createElement('div');
+    item.className = 'overview-item' + (s.classList.contains('theme-practice') ? ' is-practice' : '');
+    item.innerHTML = `
+      <div class="idx">Slide ${String(idx + 1).padStart(2, '0')}｜${pill}</div>
+      <div class="ttl">${title}</div>
+    `;
+    item.addEventListener('click', () => {
+      showSlide(idx);
+      toggleOverview();
+    });
+    ovGrid.appendChild(item);
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prevSlide();
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullscreen();
+    } else if (e.key === 'n' || e.key === 'N') {
+      toggleNotes();
+    } else if (e.key === 'g' || e.key === 'G') {
+      toggleOverview();
+    } else if (e.key === 'Escape') {
+      document.getElementById('overviewModal').classList.remove('open');
+    } else if (e.key === 't' || e.key === 'T') {
+      const box = slides[current].querySelector('.timer-box');
+      if (box) {
+        box.querySelector('.start-btn').click();
+      }
+    }
+  });
+
+  showSlide(0);
+</script>
+</body>
+</html>
